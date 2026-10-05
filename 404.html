@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Not found</title>
+  <script>
+    // GitHub Pages matches project paths case-sensitively, so /gift misses the GIFt project site
+    // and lands here. Send any spelling of it to /GIFt, keeping the rest of the address.
+    (function () {
+      var match = location.pathname.match(/^\/gift(\/.*)?$/i);
+      if (!match) return;
+      window.giftTarget = "/GIFt" + (match[1] || "/") + location.search + location.hash;
+      document.documentElement.className = "gift";
+      document.title = "GIFt";
+      var font = document.createElement("link");
+      font.rel = "stylesheet";
+      font.href = "https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap";
+      document.head.appendChild(font);
+      setTimeout(function () { location.replace(window.giftTarget); }, 1400);
+    })();
+  </script>
+  <style>
+    .gift {
+      --paper: #fcf6ea;
+      --ink: #1d2827;
+      --ink-soft: #4d5856;
+      --teal: #136b6b;
+      --cream: #fff7ea;
+      --stripe: rgba(28, 140, 140, 0.09);
+      --dot: rgba(255, 122, 92, 0.42);
+    }
+    @media (prefers-color-scheme: dark) {
+      .gift {
+        --paper: #0f1a1a;
+        --ink: #f3ead8;
+        --ink-soft: #c4bba9;
+        --teal: #1a7f7e;
+        --stripe: rgba(63, 179, 176, 0.07);
+        --dot: rgba(255, 138, 110, 0.32);
+      }
+    }
+    .gift * { box-sizing: border-box; }
+    .gift, .gift body { height: 100%; margin: 0; }
+    .gift body {
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      color: var(--ink);
+      font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      background-color: var(--paper);
+      background-image:
+        radial-gradient(circle at 12% 18%, var(--dot) 0 7px, transparent 8px),
+        radial-gradient(circle at 82% 12%, var(--dot) 0 5px, transparent 6px),
+        radial-gradient(circle at 70% 78%, var(--dot) 0 8px, transparent 9px),
+        radial-gradient(circle at 28% 86%, var(--dot) 0 4px, transparent 5px),
+        radial-gradient(circle at 92% 54%, var(--dot) 0 6px, transparent 7px),
+        radial-gradient(circle at 6% 62%, var(--dot) 0 5px, transparent 6px),
+        repeating-linear-gradient(-45deg, var(--stripe) 0 9px, transparent 9px 40px);
+    }
+    .gift main { text-align: center; }
+    .gift h1 { font: 900 clamp(2rem, 7vw, 3rem)/1.1 ui-rounded, "Nunito", system-ui, sans-serif; margin: 0 0 12px; }
+    .gift p { color: var(--ink-soft); margin: 0 0 28px; }
+
+    .gift-only { display: none; }
+    .gift .gift-only { display: block; }
+    .gift .missing { display: none; }
+    .missing { font-family: system-ui, sans-serif; margin: 3rem 1.5rem; }
+
+    /* A gift tag on a string, swinging from its pin toward the GIFt site. */
+    .hanger { position: relative; height: 140px; width: 320px; margin: 0 auto 8px; }
+    .pin {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      margin-left: -6px;
+      border-radius: 50%;
+      background: #c7462a;
+    }
+    .swing {
+      position: absolute;
+      left: 50%;
+      top: 6px;
+      transform-origin: 0 0;
+      animation: swing 1.4s cubic-bezier(0.35, 0, 0.25, 1) infinite alternate;
+    }
+    .string { position: absolute; left: -1px; top: 0; width: 2px; height: 70px; background: var(--ink-soft); opacity: 0.6; }
+    /* Hung by its hole: the hole's center sits at the end of the string. */
+    .tag {
+      position: absolute;
+      top: 46px;
+      left: -24.5px;
+      display: block;
+      text-decoration: none;
+      transform: rotate(8deg);
+      transform-origin: 24.5px 50%;
+      filter: drop-shadow(0 6px 12px rgba(19, 107, 107, 0.3));
+    }
+    .tag span {
+      position: relative;
+      display: block;
+      white-space: nowrap;
+      padding: 15px 24px 15px 44px;
+      background: var(--teal);
+      color: var(--cream);
+      font: 900 1.05rem/1 ui-rounded, "Nunito", system-ui, sans-serif;
+      clip-path: polygon(20px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 20px 100%, 0 50%);
+    }
+    .tag span::before {
+      content: "";
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      width: 9px;
+      height: 9px;
+      margin-top: -4.5px;
+      border-radius: 50%;
+      background: var(--paper);
+    }
+    @keyframes swing { from { transform: rotate(-12deg); } to { transform: rotate(9deg); } }
+    @media (prefers-reduced-motion: reduce) { .swing { animation: none; } }
+
+    .gift a.plain { color: var(--teal); font-weight: 600; }
+    @media (prefers-color-scheme: dark) { .gift a.plain { color: #6cd0cc; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="gift-only">
+      <div class="hanger" aria-hidden="true">
+        <span class="pin"></span>
+        <div class="swing">
+          <span class="string"></span>
+          <a class="tag" tabindex="-1"><span>GIFt this way</span></a>
+        </div>
+      </div>
+      <h1>Unwrapping…</h1>
+      <p>GIFt lives at <a class="plain" id="gift-link" href="/GIFt/">justintout.github.io/GIFt</a>. Taking you there.</p>
+    </div>
+    <div class="missing">
+      <h1>Not found</h1>
+      <p>Nothing is at this address.</p>
+    </div>
+  </main>
+  <script>
+    if (window.giftTarget) {
+      document.getElementById("gift-link").href = window.giftTarget;
+      document.querySelector(".tag").href = window.giftTarget;
+    }
+  </script>
+</body>
+</html>
